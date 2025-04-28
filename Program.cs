@@ -1,5 +1,7 @@
 using JoshuaWood_ST10296167_PROG7311_POE.Data;
 using JoshuaWood_ST10296167_PROG7311_POE.Models;
+using JoshuaWood_ST10296167_PROG7311_POE.Repository.User;
+using JoshuaWood_ST10296167_PROG7311_POE.Services.Login;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -28,7 +30,12 @@ namespace JoshuaWood_ST10296167_PROG7311_POE
             })
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
+
             builder.Services.AddControllersWithViews();
+
+            // Services and Repos
+            builder.Services.AddScoped<ILoginService, LoginService>(); 
+            builder.Services.AddScoped<IUserRepository, UserRepository>();
 
             var app = builder.Build();
 
@@ -36,6 +43,8 @@ namespace JoshuaWood_ST10296167_PROG7311_POE
             using (var scope = app.Services.CreateScope())
             {
                 var services = scope.ServiceProvider;
+                var context = services.GetRequiredService<ApplicationDbContext>();
+                context.Database.Migrate();
                 DbInitializer.Initialize(services).GetAwaiter().GetResult();
             }
 
