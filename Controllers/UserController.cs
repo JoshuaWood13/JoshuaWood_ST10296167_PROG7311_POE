@@ -4,13 +4,13 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace JoshuaWood_ST10296167_PROG7311_POE.Controllers
 {
-    public class LoginController : Controller
+    public class UserController : Controller
     {
         private readonly ILoginService _loginService;
 
         // Controller
         //------------------------------------------------------------------------------------------------------------------------------------------//
-        public LoginController(ILoginService loginService)
+        public UserController(ILoginService loginService)
         {
             _loginService = loginService;
         }
@@ -27,7 +27,7 @@ namespace JoshuaWood_ST10296167_PROG7311_POE.Controllers
         public async Task<IActionResult> Logout()
         {
             await _loginService.LogoutAsync();
-            return RedirectToAction("Login","Login");
+            return RedirectToAction("Login","User");
         }
         //------------------------------------------------------------------------------------------------------------------------------------------//
 

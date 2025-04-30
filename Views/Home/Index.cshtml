@@ -1,8 +1,37 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
+﻿@using Microsoft.AspNetCore.Identity
+@inject UserManager<User> UserManager
+@inject SignInManager<User> SignInManager
+@using JoshuaWood_ST10296167_PROG7311_POE.Models
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+@{
+    ViewData["Title"] = "Home Page";
+    var user = await UserManager.GetUserAsync(User);
+    string firstName = user?.FirstName ?? "User";
+    var isEmployee = await UserManager.IsInRoleAsync(user, "Employee");
+    var isFarmer = await UserManager.IsInRoleAsync(user, "Farmer");
+}
+<head>
+
+</head>
+
+<body>
+    <div class="text-center mt-5">
+        <h1>Welcome @firstName</h1>
+        <hr />
+
+        @if (isEmployee)
+        {
+            <div class="mt-4">
+                <a class="btn btn-primary m-2" asp-controller="Farmer" asp-action="Add">Add Farmer</a>
+                <a class="btn btn-secondary m-2" asp-controller="Product" asp-action="Index">View Products</a>
+            </div>
+        }
+        else if (isFarmer)
+        {
+            <div class="mt-4">
+                <a class="btn btn-primary m-2" asp-controller="Product" asp-action="Add">Add Products</a>
+                <a class="btn btn-secondary m-2" asp-controller="Product" asp-action="Current">View Current Products</a>
+            </div>
+        }
+    </div>
+</body>

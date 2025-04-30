@@ -65,11 +65,12 @@ namespace JoshuaWood_ST10296167_PROG7311_POE
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}");
+                pattern: "{controller=User}/{action=Login}/{id?}");
             app.MapRazorPages();
 
             app.Run();
