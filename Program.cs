@@ -1,7 +1,7 @@
 using JoshuaWood_ST10296167_PROG7311_POE.Data;
 using JoshuaWood_ST10296167_PROG7311_POE.Models;
 using JoshuaWood_ST10296167_PROG7311_POE.Repository.User;
-using JoshuaWood_ST10296167_PROG7311_POE.Services.Login;
+using JoshuaWood_ST10296167_PROG7311_POE.Services.User;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -34,7 +34,7 @@ namespace JoshuaWood_ST10296167_PROG7311_POE
             builder.Services.AddControllersWithViews();
 
             // Services and Repos
-            builder.Services.AddScoped<ILoginService, LoginService>(); 
+            builder.Services.AddScoped<IUserService, UserService>(); 
             builder.Services.AddScoped<IUserRepository, UserRepository>();
 
             var app = builder.Build();

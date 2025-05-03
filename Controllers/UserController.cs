@@ -1,18 +1,18 @@
 ﻿using JoshuaWood_ST10296167_PROG7311_POE.Models;
-using JoshuaWood_ST10296167_PROG7311_POE.Services.Login;
+using JoshuaWood_ST10296167_PROG7311_POE.Services.User;
 using Microsoft.AspNetCore.Mvc;
 
 namespace JoshuaWood_ST10296167_PROG7311_POE.Controllers
 {
     public class UserController : Controller
     {
-        private readonly ILoginService _loginService;
+        private readonly IUserService _userService;
 
         // Controller
         //------------------------------------------------------------------------------------------------------------------------------------------//
-        public UserController(ILoginService loginService)
+        public UserController(IUserService userService)
         {
-            _loginService = loginService;
+            _userService = userService;
         }
         //------------------------------------------------------------------------------------------------------------------------------------------//
 
@@ -22,15 +22,24 @@ namespace JoshuaWood_ST10296167_PROG7311_POE.Controllers
         {
             return View();
         }
-        //------------------------------------------------------------------------------------------------------------------------------------------//
+
+        public async Task<IActionResult> Register()
+        {
+            var newFarmerCode = await _userService.GenerateNewFarmerCode(); 
+            var model = new Register { FarmerCode = newFarmerCode };
+
+            return View(model);
+        }
 
         public async Task<IActionResult> Logout()
         {
-            await _loginService.LogoutAsync();
+            await _userService.LogoutAsync();
             return RedirectToAction("Login","User");
         }
         //------------------------------------------------------------------------------------------------------------------------------------------//
 
+        // Methods
+        //------------------------------------------------------------------------------------------------------------------------------------------//
         [HttpPost]
         public async Task<IActionResult> LoginUser(Login login)
         {
@@ -39,7 +48,7 @@ namespace JoshuaWood_ST10296167_PROG7311_POE.Controllers
                 return View("Login");
             }
 
-            var isValidUser = await _loginService.LoginUserAsync(login);
+            var isValidUser = await _userService.LoginUserAsync(login);
 
             if (isValidUser)
             {
@@ -49,5 +58,36 @@ namespace JoshuaWood_ST10296167_PROG7311_POE.Controllers
             ModelState.Clear();
             return View("Login");
         }
+
+        [HttpPost]
+        public async Task<IActionResult> RegisterFarmer(Register farmer)
+        {
+            if(!ModelState.IsValid)
+            {
+                return View("Register");
+            }
+
+            var result = await _userService.RegisterFarmerAsync(farmer);
+
+            if (result.Succeeded)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
+            foreach (var error in result.Errors)
+            {
+                if (error.Code.Contains("Password"))
+                {
+                    ModelState.AddModelError("Password", error.Description);
+                }
+                else
+                {
+                    ModelState.AddModelError(string.Empty, error.Description); 
+                }
+            }
+
+            return View("Register");
+        }
+        //------------------------------------------------------------------------------------------------------------------------------------------//
     }
 }

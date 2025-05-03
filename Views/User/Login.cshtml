@@ -45,17 +45,16 @@
 @* Used ChatGPT to provide scripts to clear invalid input on type and fade out error message after 2 seconds *@
 @section Scripts {
     <script>
-        // Listen for any typing in input fields
+        // Clear error on type
         $('input').on('input', function () {
             var $input = $(this);
 
-            // Remove red border
             $input.removeClass('is-invalid');
 
-            // Clear the error message
             $input.siblings('.invalid-feedback').text('');
         });
 
+        // Fade error message
         setTimeout(function () {
             $('#alert').fadeOut('slow');
         }, 2000);

@@ -1,0 +1,100 @@
+﻿@model JoshuaWood_ST10296167_PROG7311_POE.Models.Register
+
+<head>
+
+</head>
+
+<body>
+    <div class="text-center mt-5">
+        <h1>Register Farmer</h1>
+
+        <div class="mx-auto" style="max-width: 500px;">
+            <hr />
+            <form asp-action="RegisterFarmer">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <div class="row g-2 mb-3">
+                    <div class="col">
+                        <div class="form-floating">
+                            <input asp-for="FirstName"
+                                   class="form-control @(ViewData.ModelState["FirstName"]?.Errors.Count > 0 ? "is-invalid" : "")"
+                                   placeholder="First Name" />
+                            <label asp-for="FirstName">First Name</label>
+                            <span asp-validation-for="FirstName" class="invalid-feedback"></span>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-floating">
+                            <input asp-for="LastName"
+                                   class="form-control @(ViewData.ModelState["LastName"]?.Errors.Count > 0 ? "is-invalid" : "")"
+                                   placeholder="Last Name" />
+                            <label asp-for="LastName">Last Name</label>
+                            <span asp-validation-for="LastName" class="invalid-feedback"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row g-2 mb-3">
+                    <div class="col">
+                        <div class="form-floating">
+                            <input asp-for="Email"
+                                   class="form-control @(ViewData.ModelState["Email"]?.Errors.Count > 0 ? "is-invalid" : "")"
+                                   placeholder="Email" />
+                            <label asp-for="Email"></label>
+                            <span asp-validation-for="Email" class="invalid-feedback"></span>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-floating">
+                            <input asp-for="FarmerCode"
+                                   class="form-control"
+                                   placeholder="Farmer Code"
+                                   readonly />
+                            <label asp-for="FarmerCode"></label>
+                            <span asp-validation-for="FarmerCode" class="invalid-feedback"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row g-2 mb-3">
+                    <div class="col">
+                        <div class="form-floating">
+                            <input asp-for="Password"
+                                   type="password"
+                                   class="form-control @(ViewData.ModelState["Password"]?.Errors.Count > 0 ? "is-invalid" : "")"
+                                   placeholder="Password" />
+                            <label asp-for="Password"></label>
+                            <span asp-validation-for="Password" class="invalid-feedback"></span>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-floating">
+                            <input asp-for="ConfirmPassword"
+                                   type="password"
+                                   class="form-control @(ViewData.ModelState["ConfirmPassword"]?.Errors.Count > 0 ? "is-invalid" : "")"
+                                   placeholder="Confirm Password" />
+                            <label asp-for="ConfirmPassword">Confirm Password</label>
+                            <span asp-validation-for="ConfirmPassword" class="invalid-feedback"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary w-100" style="height: 45px;">Create Farmer</button>
+            </form>
+        </div>
+    </div>
+</body>
+
+@* Used ChatGPT to provide scripts to clear invalid input on type *@
+@section Scripts {
+    <script>
+        // Clear error on type
+        $('input').on('input', function () {
+            var $input = $(this);
+
+            $input.removeClass('is-invalid');
+
+            $input.siblings('.invalid-feedback').text('');
+        });
+    </script>
+}
