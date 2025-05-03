@@ -16,6 +16,6 @@ namespace JoshuaWood_ST10296167_PROG7311_POE.Models
         [StringLength(10)]
         public string? FarmerCode { get; set; }
 
-        public ICollection<Products> Products { get; set; }  // Navigation property to the Products model
+        public ICollection<Product> Products { get; set; }  // Navigation property to the Products model
     }
 }

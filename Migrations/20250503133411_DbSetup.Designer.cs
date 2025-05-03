@@ -9,11 +9,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace JoshuaWood_ST10296167_PROG7311_POE.Data.Migrations
+namespace JoshuaWood_ST10296167_PROG7311_POE.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250424203804_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20250503133411_DbSetup")]
+    partial class DbSetup
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -25,7 +25,7 @@ namespace JoshuaWood_ST10296167_PROG7311_POE.Data.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("JoshuaWood_ST10296167_PROG7311_POE.Models.Products", b =>
+            modelBuilder.Entity("JoshuaWood_ST10296167_PROG7311_POE.Models.Product", b =>
                 {
                     b.Property<int>("ProductID")
                         .ValueGeneratedOnAdd()
@@ -45,6 +45,11 @@ namespace JoshuaWood_ST10296167_PROG7311_POE.Data.Migrations
                         .HasMaxLength(500)
                         .HasColumnType("nvarchar(500)");
 
+                    b.Property<string>("FarmerCode")
+                        .IsRequired()
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(50)
@@ -58,12 +63,12 @@ namespace JoshuaWood_ST10296167_PROG7311_POE.Data.Migrations
                         .HasMaxLength(10)
                         .HasColumnType("nvarchar(10)");
 
-                    b.Property<string>("User")
+                    b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("ProductID");
 
-                    b.HasIndex("User");
+                    b.HasIndex("UserId");
 
                     b.ToTable("Products");
                 });
@@ -88,7 +93,6 @@ namespace JoshuaWood_ST10296167_PROG7311_POE.Data.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("FarmerCode")
-                        .IsRequired()
                         .HasMaxLength(10)
                         .HasColumnType("nvarchar(10)");
 
@@ -285,13 +289,11 @@ namespace JoshuaWood_ST10296167_PROG7311_POE.Data.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("JoshuaWood_ST10296167_PROG7311_POE.Models.Products", b =>
+            modelBuilder.Entity("JoshuaWood_ST10296167_PROG7311_POE.Models.Product", b =>
                 {
-                    b.HasOne("JoshuaWood_ST10296167_PROG7311_POE.Models.User", "FarmerCode")
+                    b.HasOne("JoshuaWood_ST10296167_PROG7311_POE.Models.User", null)
                         .WithMany("Products")
-                        .HasForeignKey("User");
-
-                    b.Navigation("FarmerCode");
+                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

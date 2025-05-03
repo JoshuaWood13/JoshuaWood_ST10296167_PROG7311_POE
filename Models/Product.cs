@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace JoshuaWood_ST10296167_PROG7311_POE.Models
 {
-    public class Products
+    public class Product
     {
         [Key]
         public int ProductID { get; set; }
@@ -21,6 +21,7 @@ namespace JoshuaWood_ST10296167_PROG7311_POE.Models
         public string Name { get; set; }
 
         [Required]
+        [Range(0.01, double.MaxValue, ErrorMessage = "Price must be greater than zero.")]
         [Column(TypeName = "decimal(18,2)")]
         public decimal Price { get; set; }
 

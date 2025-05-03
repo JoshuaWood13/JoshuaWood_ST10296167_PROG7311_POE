@@ -4,19 +4,16 @@ using JoshuaWood_ST10296167_PROG7311_POE.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace JoshuaWood_ST10296167_PROG7311_POE.Data.Migrations
+namespace JoshuaWood_ST10296167_PROG7311_POE.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250427165631_SetFarmerCodeNullable")]
-    partial class SetFarmerCodeNullable
+    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
     {
-        /// <inheritdoc />
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -25,7 +22,7 @@ namespace JoshuaWood_ST10296167_PROG7311_POE.Data.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("JoshuaWood_ST10296167_PROG7311_POE.Models.Products", b =>
+            modelBuilder.Entity("JoshuaWood_ST10296167_PROG7311_POE.Models.Product", b =>
                 {
                     b.Property<int>("ProductID")
                         .ValueGeneratedOnAdd()
@@ -289,7 +286,7 @@ namespace JoshuaWood_ST10296167_PROG7311_POE.Data.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("JoshuaWood_ST10296167_PROG7311_POE.Models.Products", b =>
+            modelBuilder.Entity("JoshuaWood_ST10296167_PROG7311_POE.Models.Product", b =>
                 {
                     b.HasOne("JoshuaWood_ST10296167_PROG7311_POE.Models.User", null)
                         .WithMany("Products")

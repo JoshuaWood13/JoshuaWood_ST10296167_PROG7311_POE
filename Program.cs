@@ -1,6 +1,8 @@
 using JoshuaWood_ST10296167_PROG7311_POE.Data;
 using JoshuaWood_ST10296167_PROG7311_POE.Models;
+using JoshuaWood_ST10296167_PROG7311_POE.Repository.Product;
 using JoshuaWood_ST10296167_PROG7311_POE.Repository.User;
+using JoshuaWood_ST10296167_PROG7311_POE.Services.Product;
 using JoshuaWood_ST10296167_PROG7311_POE.Services.User;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -36,6 +38,8 @@ namespace JoshuaWood_ST10296167_PROG7311_POE
             // Services and Repos
             builder.Services.AddScoped<IUserService, UserService>(); 
             builder.Services.AddScoped<IUserRepository, UserRepository>();
+            builder.Services.AddScoped<IProductService, ProductService>();
+            builder.Services.AddScoped<IProductRepository, ProductRepository>();
 
             var app = builder.Build();
 

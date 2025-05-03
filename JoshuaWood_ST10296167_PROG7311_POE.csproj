@@ -18,7 +18,6 @@
 
   <ItemGroup>
     <Folder Include="LocalDb\" />
-    <Folder Include="Repository\Product\" />
   </ItemGroup>
 
 </Project>
