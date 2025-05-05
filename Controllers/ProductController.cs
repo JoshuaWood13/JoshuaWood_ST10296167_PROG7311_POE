@@ -43,6 +43,15 @@ namespace JoshuaWood_ST10296167_PROG7311_POE.Controllers
 
             return View(model);
         }
+
+        public async Task<IActionResult> ViewFarmerProducts()
+        {
+            var user = await _userManager.GetUserAsync(User);
+            var farmerCode = user.FarmerCode;
+
+            var products = await _productService.GetProductsByFarmerAsync(farmerCode);
+            return View(products);
+        }
         //------------------------------------------------------------------------------------------------------------------------------------------//
 
         // Methods

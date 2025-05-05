@@ -43,5 +43,11 @@ namespace JoshuaWood_ST10296167_PROG7311_POE.Repository.Product
                 .Select(p => p.ProductCode)
                 .FirstOrDefaultAsync();
         }
+
+        public async Task<List<Models.Product>> GetAllProductsByFarmerCodeAsync(string farmerCode)
+        {
+            var products = await _context.Products.Where(p => p.FarmerCode == farmerCode).ToListAsync();
+            return products;
+        }
     }
 }

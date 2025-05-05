@@ -7,5 +7,7 @@ namespace JoshuaWood_ST10296167_PROG7311_POE.Services.Product
         Task<bool> AddProductAsync(Models.Product product);
 
         Task<string> GenerateProductCodeAsync();
+
+        Task<List<Models.Product>> GetProductsByFarmerAsync(string farmerCode);
     }
 }

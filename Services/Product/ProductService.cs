@@ -57,6 +57,12 @@ namespace JoshuaWood_ST10296167_PROG7311_POE.Services.Product
 
             return $"P{codeNumber:D3}"; 
         }
+
+        public async Task<List<Models.Product>> GetProductsByFarmerAsync(string farmerCode)
+        {
+            var products = await _productRepository.GetAllProductsByFarmerCodeAsync(farmerCode);
+            return products;
+        }
         //------------------------------------------------------------------------------------------------------------------------------------------//
 
     }

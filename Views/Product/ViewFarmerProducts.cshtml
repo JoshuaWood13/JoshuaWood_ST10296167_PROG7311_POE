@@ -1,0 +1,98 @@
+﻿@model List<JoshuaWood_ST10296167_PROG7311_POE.Models.Product>
+
+<head>
+    <style>
+        h1 {
+            margin-top: 20px;
+        }
+        table {
+            table-layout: fixed;
+            width: 100%;
+        }
+
+        table, th, td {
+            border: 1px solid grey;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<h1>Your Products</h1>
+<hr />
+<body>
+
+    @if (!Model.Any())
+    {
+        <p>You currently have no products</p>
+    }
+    else
+    {
+        <table class="table table-success">
+            <thead>
+                <tr>
+                    <th scope="col">Product Code</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Category</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Date Added</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach(var product in Model)
+                {
+                    <tr class="table-secondary">
+                        <td>@product.ProductCode</td>
+                        <td>@product.Name</td>
+                        <td>@product.Price.ToString("F2")</td>
+                        <td>@product.Category</td>
+                        <td>
+                            @if (string.IsNullOrWhiteSpace(product.Description))
+                            {
+                                <span>None</span>
+                            }
+                            else
+                            {
+                                <button type="button"
+                                        class="btn btn-sm btn-outline-secondary"
+                                        data-bs-toggle="modal"
+                                        data-bs-target="#descModal-@product.ProductCode">
+                                    Read
+                                </button>
+                            }
+                        </td>
+                        <td>@product.DateAdded.ToString("dd/MM/yyyy")</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        @foreach (var product in Model)
+        {
+            // Used ChatGPT to help generate the HTML to display the product description in a Modal
+            if (!string.IsNullOrWhiteSpace(product.Description))
+            {
+                <div class="modal fade" id="descModal-@product.ProductCode" tabindex="-1" aria-labelledby="descModalLabel-@product.ProductCode" aria-hidden="true">
+                    <div class="modal-dialog modal-lg modal-dialog-scrollable">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="descModalLabel-@product.ProductCode">Product Description</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body" style="word-wrap: break-word; max-height: 500px;">
+                                @Html.Raw(product.Description.Trim().Replace(Environment.NewLine, "<br />"))
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+    }
+
+</body>
