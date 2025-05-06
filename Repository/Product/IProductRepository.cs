@@ -10,5 +10,7 @@ namespace JoshuaWood_ST10296167_PROG7311_POE.Repository.Product
         Task<string> GetLatestProductCodeAsync();
 
         Task<List<Models.Product>> GetAllProductsByFarmerCodeAsync(string farmerCode);
+
+        Task<List<Models.Product>> GetAllProductsAsync();
     }
 }

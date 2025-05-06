@@ -49,5 +49,11 @@ namespace JoshuaWood_ST10296167_PROG7311_POE.Repository.Product
             var products = await _context.Products.Where(p => p.FarmerCode == farmerCode).ToListAsync();
             return products;
         }
+
+        public async Task<List<Models.Product>> GetAllProductsAsync()
+        {
+            var productts = await _context.Products.ToListAsync();
+            return productts;
+        }
     }
 }

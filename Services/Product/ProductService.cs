@@ -63,6 +63,12 @@ namespace JoshuaWood_ST10296167_PROG7311_POE.Services.Product
             var products = await _productRepository.GetAllProductsByFarmerCodeAsync(farmerCode);
             return products;
         }
+
+        public async Task<List<Models.Product>> GetProductsAsync()
+        {
+            var products = await _productRepository.GetAllProductsAsync();
+            return products;
+        }
         //------------------------------------------------------------------------------------------------------------------------------------------//
 
     }

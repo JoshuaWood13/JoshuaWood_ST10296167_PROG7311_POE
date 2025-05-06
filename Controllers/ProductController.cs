@@ -52,6 +52,12 @@ namespace JoshuaWood_ST10296167_PROG7311_POE.Controllers
             var products = await _productService.GetProductsByFarmerAsync(farmerCode);
             return View(products);
         }
+
+        public async Task<IActionResult> ViewProducts()
+        {
+            var products = await _productService.GetProductsAsync();
+            return View(products);
+        }
         //------------------------------------------------------------------------------------------------------------------------------------------//
 
         // Methods
@@ -78,7 +84,6 @@ namespace JoshuaWood_ST10296167_PROG7311_POE.Controllers
             }
 
             TempData["Error"] = "Failed to add product";
-           // ModelState.Clear();
             return View("AddProduct");
         }
     }

@@ -5,6 +5,7 @@
         h1 {
             margin-top: 20px;
         }
+
         table {
             table-layout: fixed;
             width: 100%;
@@ -26,19 +27,19 @@
     </style>
 </head>
 
-<h1>Your Products</h1>
+<h1>Farmer Products</h1>
 <hr />
 <body>
-
     @if (!Model.Any())
     {
-        <p>You currently have no products</p>
+        <p>There are currently no products being offered by farmers</p>
     }
     else
     {
-        <table class="table table-success">
+        <table class="table table-info">
             <thead>
                 <tr>
+                    <th scope="col">Farmer Code</th>
                     <th scope="col">Product Code</th>
                     <th scope="col">Name</th>
                     <th scope="col">Price</th>
@@ -48,9 +49,10 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach(var product in Model)
+                @foreach (var product in Model)
                 {
                     <tr class="table-secondary">
+                        <td>@product.FarmerCode</td>
                         <td>@product.ProductCode</td>
                         <td>@product.Name</td>
                         <td>@product.Price.ToString("F2")</td>
@@ -99,5 +101,4 @@
             }
         }
     }
-
 </body>
