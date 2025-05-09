@@ -53,15 +53,32 @@ namespace JoshuaWood_ST10296167_PROG7311_POE.Controllers
             return View(products);
         }
 
-        public async Task<IActionResult> ViewProducts()
+        public async Task<IActionResult> ViewProducts(string farmerCode, string category, DateTime? startDate, DateTime? endDate)
         {
+            // Populate filter model with selected filters
+            var filteredModel = new FilteredProducts
+            {
+                SelectedFarmerCode = farmerCode,
+                SelectedCategory = category,
+                StartDate = startDate,
+                EndDate = endDate
+            };
+
+            // Get list of products based on the filters
+            filteredModel.Products = await _productService.GetFilteredProductsAsync(filteredModel);
+
+            // Populate filter options 
             var products = await _productService.GetProductsAsync();
-            return View(products);
+            filteredModel.FarmerCodes = products.Select(p => p.FarmerCode).Distinct().ToList();
+            filteredModel.Categories = products.Select(p => p.Category).Distinct().ToList();
+
+            return View(filteredModel);
         }
         //------------------------------------------------------------------------------------------------------------------------------------------//
 
         // Methods
         //------------------------------------------------------------------------------------------------------------------------------------------//
+        [HttpPost]
         public async Task<IActionResult> AddFarmerProduct(Product product)
         {
             if (!ModelState.IsValid)
@@ -86,5 +103,7 @@ namespace JoshuaWood_ST10296167_PROG7311_POE.Controllers
             TempData["Error"] = "Failed to add product";
             return View("AddProduct");
         }
+        //------------------------------------------------------------------------------------------------------------------------------------------//
     }
 }
+//--------------------------------------------------------X END OF FILE X-------------------------------------------------------------------//

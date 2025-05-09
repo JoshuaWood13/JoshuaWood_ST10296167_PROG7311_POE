@@ -1,4 +1,5 @@
 ﻿
+using JoshuaWood_ST10296167_PROG7311_POE.Models;
 using JoshuaWood_ST10296167_PROG7311_POE.Repository.Product;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -68,6 +69,34 @@ namespace JoshuaWood_ST10296167_PROG7311_POE.Services.Product
         {
             var products = await _productRepository.GetAllProductsAsync();
             return products;
+        }
+
+        public async Task<List<Models.Product>> GetFilteredProductsAsync(FilteredProducts filter)
+        {
+            var products = await _productRepository.GetAllProductsAsync();
+            var filterQuery = products.AsQueryable();
+
+            if (!string.IsNullOrEmpty(filter.SelectedFarmerCode))
+            {
+                filterQuery = filterQuery.Where(p => p.FarmerCode == filter.SelectedFarmerCode);
+            }
+
+            if (!string.IsNullOrEmpty(filter.SelectedCategory))
+            {
+                filterQuery = filterQuery.Where(p => p.Category == filter.SelectedCategory);
+            }
+
+            if (filter.StartDate.HasValue)
+            {
+                filterQuery = filterQuery.Where(d => d.DateAdded >= filter.StartDate.Value);
+            }
+
+            if (filter.EndDate.HasValue)
+            {
+                filterQuery = filterQuery.Where(d => d.DateAdded <= filter.EndDate.Value);
+            }
+
+            return filterQuery.ToList();
         }
         //------------------------------------------------------------------------------------------------------------------------------------------//
 

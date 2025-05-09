@@ -1,4 +1,5 @@
-﻿using System.Security.Claims;
+﻿using JoshuaWood_ST10296167_PROG7311_POE.Models;
+using System.Security.Claims;
 
 namespace JoshuaWood_ST10296167_PROG7311_POE.Services.Product
 {
@@ -11,5 +12,7 @@ namespace JoshuaWood_ST10296167_PROG7311_POE.Services.Product
         Task<List<Models.Product>> GetProductsByFarmerAsync(string farmerCode);
 
         Task<List<Models.Product>> GetProductsAsync();
+
+        Task<List<Models.Product>> GetFilteredProductsAsync(FilteredProducts filter);
     }
 }
