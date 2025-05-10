@@ -4,7 +4,6 @@
 @using JoshuaWood_ST10296167_PROG7311_POE.Models
 
 @{
-    ViewData["Title"] = "Home Page";
     var user = await UserManager.GetUserAsync(User);
     string firstName = user?.FirstName ?? "User";
     var isEmployee = await UserManager.IsInRoleAsync(user, "Employee");
@@ -21,16 +20,30 @@
 
         @if (isEmployee)
         {
-            <div class="mt-4">
-                <a class="btn btn-primary m-2" asp-controller="User" asp-action="Register">Add Farmer</a>
-                <a class="btn btn-secondary m-2" asp-controller="Product" asp-action="ViewProducts">View Products</a>
+            <div class="mt-4 d-flex flex-wrap justify-content-center gap-4">
+                <a asp-controller="User" asp-action="Register" class="btn btn-light text-center shadow rounded p-3" style="width: 180px;">
+                    <img src="~/images/img_farmer.png" alt="Add Farmer" style="height: 80px;" class="mb-2 img-fluid" />
+                    <div class="fw-semibold fs-6 text-dark">Add Farmer</div>
+                </a>
+
+                <a asp-controller="Product" asp-action="ViewProducts" class="btn btn-light text-center shadow rounded p-3" style="width: 180px;">
+                    <img src="~/images/img_products.png" alt="View Products" style="height: 80px;" class="mb-2 img-fluid" />
+                    <div class="fw-semibold fs-6 text-dark">View Products</div>
+                </a>
             </div>
         }
         else if (isFarmer)
         {
-            <div class="mt-4">
-                <a class="btn btn-primary m-2" asp-controller="Product" asp-action="AddProduct">Add Products</a>
-                <a class="btn btn-secondary m-2" asp-controller="Product" asp-action="ViewFarmerProducts">View Current Products</a>
+            <div class="mt-4 d-flex flex-wrap justify-content-center gap-4">
+                <a asp-controller="Product" asp-action="AddProduct" class="btn btn-light text-center shadow rounded p-3" style="width: 180px;">
+                    <img src="~/images/img_add_product.png" alt="Add Product" style="height: 80px;" class="mb-2 img-fluid" />
+                    <div class="fw-semibold fs-6 text-dark">Add Product</div>
+                </a>
+
+                <a asp-controller="Product" asp-action="ViewProducts" class="btn btn-light text-center shadow rounded p-3" style="width: 180px;">
+                    <img src="~/images/img_your_products.png" alt="Your Products" style="height: 80px;" class="mb-2 img-fluid" />
+                    <div class="fw-semibold fs-6 text-dark">Your Products</div>
+                </a>
             </div>
         }
     </div>
