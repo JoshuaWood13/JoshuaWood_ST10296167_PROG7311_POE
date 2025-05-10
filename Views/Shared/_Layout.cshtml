@@ -55,7 +55,7 @@
                                     var user = await UserManager.GetUserAsync(User);
                                     var fullName = $"{user?.FirstName} {user?.LastName}";
                                 }
-                                <span class="nav-link text-dark mb-0">@fullName</span>
+                                <span class="nav-link text-dark fw-bold mb-0">@fullName</span>
                             </li>
                             <li class="nav-item">
                                 <form class="form-inline" asp-area="" asp-controller="User" asp-action="Logout">

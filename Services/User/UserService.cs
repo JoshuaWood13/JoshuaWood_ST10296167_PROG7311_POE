@@ -10,15 +10,15 @@ namespace JoshuaWood_ST10296167_PROG7311_POE.Services.User
     {
         private readonly IUserRepository _userRepository;
         private readonly SignInManager<Models.User> _signInManager;
-        private readonly UserManager<Models.User> _userManager;
+       // private readonly UserManager<Models.User> _userManager;
 
         // Controller
         //------------------------------------------------------------------------------------------------------------------------------------------//
-        public UserService(IUserRepository userRepository, SignInManager<Models.User> signInManager, UserManager<Models.User> userManager)
+        public UserService(IUserRepository userRepository, SignInManager<Models.User> signInManager)
         {
             _userRepository = userRepository;
             _signInManager = signInManager;
-            _userManager = userManager;
+            //_userManager = userManager;
         }
         //------------------------------------------------------------------------------------------------------------------------------------------//
         

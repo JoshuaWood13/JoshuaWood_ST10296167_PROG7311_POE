@@ -83,13 +83,6 @@ namespace JoshuaWood_ST10296167_PROG7311_POE.Controllers
         {
             if (!ModelState.IsValid)
             {
-                foreach (var value in ModelState.Values)
-                {
-                    foreach (var error in value.Errors)
-                    {
-                        Console.WriteLine(error.ErrorMessage);
-                    }
-                }
                 return View("AddProduct");
             }
 
@@ -97,11 +90,14 @@ namespace JoshuaWood_ST10296167_PROG7311_POE.Controllers
 
             if (result)
             {
-                return RedirectToAction("Index", "Home");
+                TempData["Success"] = "Product successfully added!";
+                return RedirectToAction("AddProduct");
             }
-
-            TempData["Error"] = "Failed to add product";
-            return View("AddProduct");
+            else
+            {
+                TempData["Error"] = "Failed to add product";
+                return View("AddProduct");
+            }
         }
         //------------------------------------------------------------------------------------------------------------------------------------------//
     }

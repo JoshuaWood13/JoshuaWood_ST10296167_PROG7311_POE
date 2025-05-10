@@ -71,7 +71,8 @@ namespace JoshuaWood_ST10296167_PROG7311_POE.Controllers
 
             if (result.Succeeded)
             {
-                return RedirectToAction("Index", "Home");
+                TempData["Success"] = "Farmer succesfully created!";
+                return RedirectToAction("Register");
             }
 
             foreach (var error in result.Errors)
@@ -79,6 +80,10 @@ namespace JoshuaWood_ST10296167_PROG7311_POE.Controllers
                 if (error.Code.Contains("Password"))
                 {
                     ModelState.AddModelError("Password", error.Description);
+                }
+                else if (error.Code.Contains("Email") || error.Description.Contains("already taken"))
+                {
+                    ModelState.AddModelError("Email", "Email is already taken");
                 }
                 else
                 {
@@ -91,3 +96,4 @@ namespace JoshuaWood_ST10296167_PROG7311_POE.Controllers
         //------------------------------------------------------------------------------------------------------------------------------------------//
     }
 }
+//--------------------------------------------------------X END OF FILE X-------------------------------------------------------------------//
