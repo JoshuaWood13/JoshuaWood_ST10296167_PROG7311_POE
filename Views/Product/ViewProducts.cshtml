@@ -76,6 +76,12 @@
             <label class="form-label mb-1 d-none">&nbsp;</label>
             <button type="submit" class="btn btn-success btn-sm">Apply</button>
         </div>
+
+        <!-- Reset Button -->
+        <div class="d-flex flex-column justify-content-end">
+            <label class="form-label mb-1 d-none">&nbsp;</label>
+            <button type="submit" class="btn btn-warning btn-sm" onclick="resetFilters()">Reset</button>
+        </div>
     </form>
 </div>
 
@@ -154,3 +160,14 @@
         }
     }
 </body>
+
+<script>
+    function resetFilters() {
+        document.getElementById("farmerCode").value = "";
+        document.getElementById("category").value = "";
+        document.getElementById("startDate").value = "";
+        document.getElementById("endDate").value = "";
+
+        document.querySelector('form').submit();
+    }
+</script>
