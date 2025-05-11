@@ -93,7 +93,8 @@ namespace JoshuaWood_ST10296167_PROG7311_POE.Services.Product
 
             if (filter.EndDate.HasValue)
             {
-                filterQuery = filterQuery.Where(d => d.DateAdded <= filter.EndDate.Value);
+                var nextDay = filter.EndDate.Value.AddDays(1);
+                filterQuery = filterQuery.Where(d => d.DateAdded < nextDay);
             }
 
             return filterQuery.ToList();
