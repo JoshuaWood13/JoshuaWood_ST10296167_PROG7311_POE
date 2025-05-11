@@ -15,6 +15,10 @@ namespace JoshuaWood_ST10296167_PROG7311_POE.Controllers
 
         public IActionResult Index()
         {
+            if (!User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Login", "User");
+            }
             return View();
         }
 

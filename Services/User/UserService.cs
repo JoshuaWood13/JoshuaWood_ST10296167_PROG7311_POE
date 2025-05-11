@@ -10,7 +10,6 @@ namespace JoshuaWood_ST10296167_PROG7311_POE.Services.User
     {
         private readonly IUserRepository _userRepository;
         private readonly SignInManager<Models.User> _signInManager;
-       // private readonly UserManager<Models.User> _userManager;
 
         // Controller
         //------------------------------------------------------------------------------------------------------------------------------------------//
@@ -18,7 +17,6 @@ namespace JoshuaWood_ST10296167_PROG7311_POE.Services.User
         {
             _userRepository = userRepository;
             _signInManager = signInManager;
-            //_userManager = userManager;
         }
         //------------------------------------------------------------------------------------------------------------------------------------------//
         
@@ -26,19 +24,15 @@ namespace JoshuaWood_ST10296167_PROG7311_POE.Services.User
         //------------------------------------------------------------------------------------------------------------------------------------------//
         public async Task<bool> LoginUserAsync(Login login)
         {
-            var user = await _userRepository.GetUserByEmailAsync(login.Email);
-
-            if (user != null)
+            var result = await _signInManager.PasswordSignInAsync(login.Email,login.Password, isPersistent: false, lockoutOnFailure: false);
+            if (result.Succeeded)
             {
-                var isPasswordValid = await _signInManager.CheckPasswordSignInAsync(user, login.Password, false);
-
-                if (isPasswordValid.Succeeded)
-                {
-                    await _signInManager.SignInAsync(user, isPersistent: false);
-                    return true;
-                }
+                return true;
             }
-            return false;
+            else
+            {
+                return false;
+            }
         }
 
         public async Task<IdentityResult> RegisterFarmerAsync(Register register)
