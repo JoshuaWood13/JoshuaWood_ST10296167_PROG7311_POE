@@ -10,21 +10,23 @@ namespace JoshuaWood_ST10296167_PROG7311_POE.Data
         {
             using (var context = new ApplicationDbContext(serviceProvider.GetRequiredService<DbContextOptions<ApplicationDbContext>>()))
             {
-                if (context.Roles.Any())
+                if (context.Roles.Any() && context.Products.Any())
                 {
                     return;
                 }
 
-                // If Db not seeded then create roles
-                var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
-
-                string[] roleNames = { "Farmer", "Employee" };
-
-                foreach (var roleName in roleNames)
+                if (!context.Roles.Any())
                 {
-                    if (!await roleManager.RoleExistsAsync(roleName))
+                    var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+
+                    string[] roleNames = { "Farmer", "Employee" };
+
+                    foreach (var roleName in roleNames)
                     {
-                        await roleManager.CreateAsync(new IdentityRole(roleName));
+                        if (!await roleManager.RoleExistsAsync(roleName))
+                        {
+                            await roleManager.CreateAsync(new IdentityRole(roleName));
+                        }
                     }
                 }
 
@@ -59,35 +61,165 @@ namespace JoshuaWood_ST10296167_PROG7311_POE.Data
                     }
                 }
 
-                // Default Farmer user
-                var farmerEmail = "farmer@agrienergy.com";
-                if (await userManager.FindByEmailAsync(farmerEmail) == null)
+                // Create demonstration farmers
+                var farmers = new[]
                 {
-                    var farmer = new User
-                    {
-                        UserName = farmerEmail,
-                        Email = farmerEmail,
-                        FirstName = "Default",
-                        LastName = "Farmer",
-                        EmailConfirmed = true,
-                        FarmerCode = "F001"
-                    };
+                    new { Email = "farmer1@agrienergy.com", FarmerCode = "F001", FirstName = "Bob", LastName = "Dylan" },
+                    new { Email = "farmer2@agrienergy.com", FarmerCode = "F002", FirstName = "David", LastName = "Bowie" },
+                    new { Email = "farmer3@agrienergy.com", FarmerCode = "F003", FirstName = "Anita", LastName = "Baker" }
+                };
 
-                    var result = await userManager.CreateAsync(farmer, "Farmer123!");
-                    if (result.Succeeded)
+                foreach (var farmer in farmers)
+                {
+                    if (await userManager.FindByEmailAsync(farmer.Email) == null)
                     {
-                        await userManager.AddToRoleAsync(farmer, "Farmer");
-                        Console.WriteLine("Created FARMER");
-                    }
-                    else
-                    {
-                        foreach (var error in result.Errors)
+                        var newFarmer = new User
                         {
-                            Console.WriteLine(error.Description); 
+                            UserName = farmer.Email,
+                            Email = farmer.Email,
+                            FirstName = farmer.FirstName,
+                            LastName = farmer.LastName,
+                            EmailConfirmed = true,
+                            FarmerCode = farmer.FarmerCode
+                        };
+
+                        string farmerNumber = farmer.FarmerCode.Substring(1);
+                        string password = $"Farmer{int.Parse(farmerNumber)}!";
+
+                        var result = await userManager.CreateAsync(newFarmer, password);
+                        if (result.Succeeded)
+                        {
+                            await userManager.AddToRoleAsync(newFarmer, "Farmer");
+                            Console.WriteLine($"Created FARMER {farmer.FarmerCode}");
+                        }
+                        else
+                        {
+                            foreach (var error in result.Errors)
+                            {
+                                Console.WriteLine(error.Description);
+                            }
                         }
                     }
+                }
+
+                // Add demonstration products
+                if (!context.Products.Any())
+                {
+                    var products = new List<Product>
+                    {
+                        new Product
+                        {
+                            ProductCode = "P001",
+                            FarmerCode = "F001",
+                            Name = "Barley",
+                            Price = 20.00m,
+                            Description = "Sold per 1kg",
+                            Category = "Grains",
+                            DateAdded = DateTime.Now.AddDays(-8)
+
+                        },
+                        new Product
+                        {
+                            ProductCode = "P002",
+                            FarmerCode = "F002",
+                            Name = "Orange",
+                            Price = 4.99m,
+                            Description = "Sold individually",
+                            Category = "Fruits",
+                            DateAdded = DateTime.Now.AddDays(-8)
+
+                        },
+                        new Product
+                        {
+                            ProductCode = "P003",
+                            FarmerCode = "F001",
+                            Name = "Potato",
+                            Price = 9.99m,
+                            Description = "Sold per 10kg",
+                            Category = "Vegetables",
+                            DateAdded = DateTime.Now.AddDays(-6)
+
+                        },
+                        new Product
+                        {
+                            ProductCode = "P004",
+                            FarmerCode = "F003",
+                            Name = "Milk",
+                            Price = 10.00m,
+                            Description = "Fresh from our pasture-raised cows, this milk is rich, creamy," +
+                            " and packed with natural goodness. We milk daily to ensure top quality and deliver straight" +
+                            " from our farm to your table.",
+                            Category = "Consumer Products",
+                            DateAdded = DateTime.Now.AddDays(-5)
+
+                        },
+                        new Product
+                        {
+                            ProductCode = "P005",
+                            FarmerCode = "F003",
+                            Name = "Cattle",
+                            Price = 11500.00m,
+                            Description = "The following specifications outline the key qualities and health standards of the cattle offered for sale:\n" +
+                            "- Average age: 2–3 years \n- Vaccinated and regularly checked by a licensed vet \n-Healthy, well-fed cattle raised on natural pasture",
+                            Category = "Livestock",
+                            DateAdded = DateTime.Now.AddDays(-5)
+
+                        },
+                        new Product
+                        {
+                            ProductCode = "P006",
+                            FarmerCode = "F001",
+                            Name = "Chicken",
+                            Price = 200.00m,
+                            Description = "The chickens available for sale have been raised under controlled," +
+                            " healthy conditions to ensure optimal quality and suitability for various purposes:\n" +
+                            "- Average weight: 1.8 – 2.5 kg \n- Regularly monitored by certified veterinarians \n - Free-range and fed a balanced, nutrient-rich diet",
+                            Category = "Livestock",
+                            DateAdded = DateTime.Now.AddDays(-2)
+
+                        },
+                        new Product
+                        {
+                            ProductCode = "P007",
+                            FarmerCode = "F002",
+                            Name = "Rice",
+                            Price = 70.00m,
+                            Description = "Sold per 1kg",
+                            Category = "Grains",
+                            DateAdded = DateTime.Now.AddDays(-1)
+
+                        },
+                        new Product
+                        {
+                            ProductCode = "P008",
+                            FarmerCode = "F002",
+                            Name = "Carrot",
+                            Price = 20.00m,
+                            Description = "Sold per 1kg",
+                            Category = "Vegetables",
+                            DateAdded = DateTime.Now.AddDays(-1)
+
+                        },
+                        new Product
+                        {
+                            ProductCode = "P009",
+                            FarmerCode = "F001",
+                            Name = "Wine",
+                            Price = 399.99m,
+                            Description = "Crafted from handpicked grapes and aged to perfection, " +
+                            "this wine offers a rich, full-bodied flavor ideal for both casual enjoyment and fine dining.",
+                            Category = "Consumer Products",
+                            DateAdded = DateTime.Now
+
+                        },
+                    };
+
+                    context.Products.AddRange(products);
+                    await context.SaveChangesAsync();
+                    Console.WriteLine("Created demonstration products");
                 }
             }
         }
     }
 }
+//--------------------------------------------------------X END OF FILE X-------------------------------------------------------------------//
