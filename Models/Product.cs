@@ -16,11 +16,11 @@ namespace JoshuaWood_ST10296167_PROG7311_POE.Models
         [StringLength(10)]
         public string FarmerCode { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Please enter a name")]
         [StringLength(50)]
         public string Name { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Please enter a price")]
         [Range(0.01, double.MaxValue, ErrorMessage = "Price must be greater than zero.")]
         [Column(TypeName = "decimal(18,2)")]
         public decimal Price { get; set; }

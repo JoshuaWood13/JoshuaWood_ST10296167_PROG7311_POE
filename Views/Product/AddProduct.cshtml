@@ -32,9 +32,16 @@
                 </div>
 
                 <div class="form-floating mb-3">
-                    <input asp-for="Category"
-                           class="form-control @(ViewData.ModelState["Category"]?.Errors.Count > 0 ? "is-invalid" : "")"
-                           placeholder="Product Category" />
+                    <select asp-for="Category"
+                            class="form-select @(ViewData.ModelState["Category"]?.Errors.Count > 0 ? "is-invalid" : "")">
+                        <option hidden disabled selected value="">Select</option>
+                        <option value="Consumer Products">Consumer Products</option>
+                        <option value="Fruits">Fruits</option>
+                        <option value="Grains">Grains</option>
+                        <option value="Livestock">Livestock</option>
+                        <option value="Vegetables">Vegetables</option>
+                        <option value="Other">Other</option>
+                    </select>
                     <label asp-for="Category"></label>
                     <span asp-validation-for="Category" class="invalid-feedback"></span>
                 </div>
