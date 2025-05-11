@@ -159,8 +159,10 @@ namespace JoshuaWood_ST10296167_PROG7311_POE.Data
                             FarmerCode = "F003",
                             Name = "Cattle",
                             Price = 11500.00m,
-                            Description = "The following specifications outline the key qualities and health standards of the cattle offered for sale:\n" +
-                            "- Average age: 2–3 years \n- Vaccinated and regularly checked by a licensed vet \n-Healthy, well-fed cattle raised on natural pasture",
+                            Description = "The following specifications outline the key qualities and health standards of the cattle offered for sale:" + Environment.NewLine +
+                            "- Average age: 2–3 years" + Environment.NewLine + 
+                            "- Vaccinated and regularly checked by a licensed vet" + Environment.NewLine +
+                            "- Healthy, well-fed cattle raised on natural pasture",
                             Category = "Livestock",
                             DateAdded = DateTime.Now.AddDays(-5)
 
@@ -171,9 +173,10 @@ namespace JoshuaWood_ST10296167_PROG7311_POE.Data
                             FarmerCode = "F001",
                             Name = "Chicken",
                             Price = 200.00m,
-                            Description = "The chickens available for sale have been raised under controlled," +
-                            " healthy conditions to ensure optimal quality and suitability for various purposes:\n" +
-                            "- Average weight: 1.8 – 2.5 kg \n- Regularly monitored by certified veterinarians \n - Free-range and fed a balanced, nutrient-rich diet",
+                            Description = "The chickens available for sale have been raised under controlled, healthy conditions to ensure optimal quality and suitability for various purposes:" + Environment.NewLine +
+                            "- Average weight: 1.8 – 2.5 kg" + Environment.NewLine +
+                            "- Regularly monitored by certified veterinarians" + Environment.NewLine +
+                            "- Free-range and fed a balanced, nutrient-rich diet",
                             Category = "Livestock",
                             DateAdded = DateTime.Now.AddDays(-2)
 
