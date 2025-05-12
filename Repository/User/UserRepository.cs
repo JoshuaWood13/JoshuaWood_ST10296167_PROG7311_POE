@@ -1,7 +1,6 @@
 ﻿using JoshuaWood_ST10296167_PROG7311_POE.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
 
 namespace JoshuaWood_ST10296167_PROG7311_POE.Repository.User
 {
