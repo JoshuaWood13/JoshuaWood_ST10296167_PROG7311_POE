@@ -20,8 +20,9 @@ namespace JoshuaWood_ST10296167_PROG7311_POE.Services.User
         }
         //------------------------------------------------------------------------------------------------------------------------------------------//
         
-        // Service Methods
+        // Methods
         //------------------------------------------------------------------------------------------------------------------------------------------//
+        // This method attempts to log in a user based on the entered email and password 
         public async Task<bool> LoginUserAsync(Login login)
         {
             var result = await _signInManager.PasswordSignInAsync(login.Email,login.Password, isPersistent: false, lockoutOnFailure: false);
@@ -35,6 +36,7 @@ namespace JoshuaWood_ST10296167_PROG7311_POE.Services.User
             }
         }
 
+        // This method creates a new farmer based on the data input by an employee
         public async Task<IdentityResult> RegisterFarmerAsync(Register register)
         {
             var farmer = new Models.User
@@ -50,11 +52,13 @@ namespace JoshuaWood_ST10296167_PROG7311_POE.Services.User
             return await _userRepository.CreateFarmerAsync(farmer, register.Password);
         }
 
+        // This methods logs the user out of their account 
         public async Task LogoutAsync()
         {
             await _signInManager.SignOutAsync();
         }
 
+        // This method generates and formats a returns new farmer code based on the latest farmer code
         public async Task<string> GenerateNewFarmerCode()
         {
             var latestFarmerCode = await _userRepository.GetLatestFarmerCodeAsync();

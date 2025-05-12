@@ -57,12 +57,13 @@ namespace JoshuaWood_ST10296167_PROG7311_POE
 
             var app = builder.Build();
 
-            // Call the database initializer
             using (var scope = app.Services.CreateScope())
             {
                 var services = scope.ServiceProvider;
                 var context = services.GetRequiredService<ApplicationDbContext>();
+                // Create db if not created
                 context.Database.Migrate();
+                // Call the database initializer
                 DbInitializer.Initialize(services).GetAwaiter().GetResult();
             }
 
@@ -74,7 +75,6 @@ namespace JoshuaWood_ST10296167_PROG7311_POE
             else
             {
                 app.UseExceptionHandler("/Home/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
 
@@ -95,3 +95,4 @@ namespace JoshuaWood_ST10296167_PROG7311_POE
         }
     }
 }
+//--------------------------------------------------------X END OF FILE X-------------------------------------------------------------------//

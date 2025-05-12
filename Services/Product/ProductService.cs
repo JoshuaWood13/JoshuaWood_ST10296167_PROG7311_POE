@@ -9,19 +9,18 @@ namespace JoshuaWood_ST10296167_PROG7311_POE.Services.Product
     public class ProductService : IProductService
     {
         private readonly IProductRepository _productRepository;
-        private readonly UserManager<Models.User> _userManager;
 
         // Controller
         //------------------------------------------------------------------------------------------------------------------------------------------//
-        public ProductService(IProductRepository productRepository, UserManager<Models.User> userManager)
+        public ProductService(IProductRepository productRepository)
         {
             _productRepository = productRepository;
-            _userManager = userManager;
         }
         //------------------------------------------------------------------------------------------------------------------------------------------//
 
         // Methods
         //------------------------------------------------------------------------------------------------------------------------------------------//
+        // This method adds a product with the current time
         public async Task<bool> AddProductAsync(Models.Product product)
         {
             try
@@ -36,6 +35,7 @@ namespace JoshuaWood_ST10296167_PROG7311_POE.Services.Product
             }
         }
 
+        // This method generates, formats and returns a new product code for a product
         public async Task<string> GenerateProductCodeAsync()
         {
             var latestCode = await _productRepository.GetLatestProductCodeAsync();
@@ -59,18 +59,21 @@ namespace JoshuaWood_ST10296167_PROG7311_POE.Services.Product
             return $"P{codeNumber:D3}"; 
         }
 
+        // This method returns all the products added by a specific farmer
         public async Task<List<Models.Product>> GetProductsByFarmerAsync(string farmerCode)
         {
             var products = await _productRepository.GetAllProductsByFarmerCodeAsync(farmerCode);
             return products;
         }
 
+        // This method returns all products added by all farmers
         public async Task<List<Models.Product>> GetProductsAsync()
         {
             var products = await _productRepository.GetAllProductsAsync();
             return products;
         }
 
+        // This method dynamically gets a list of products based on selected filters 
         public async Task<List<Models.Product>> GetFilteredProductsAsync(FilteredProducts filter)
         {
             var products = await _productRepository.GetAllProductsAsync();
@@ -103,3 +106,4 @@ namespace JoshuaWood_ST10296167_PROG7311_POE.Services.Product
 
     }
 }
+//--------------------------------------------------------X END OF FILE X-------------------------------------------------------------------//

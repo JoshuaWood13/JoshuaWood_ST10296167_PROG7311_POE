@@ -23,12 +23,12 @@ namespace JoshuaWood_ST10296167_PROG7311_POE.Models
         [Required(ErrorMessage = "Please enter a price")]
         [Range(0.01, double.MaxValue, ErrorMessage = "Price must be greater than zero.")]
         [Column(TypeName = "decimal(18,2)")]
-        public decimal Price { get; set; }
+        public decimal? Price { get; set; }
 
         [StringLength(500)]
         public string? Description { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Please select a category")]
         [StringLength(20)]
         public string Category { get; set; }
 
@@ -38,3 +38,4 @@ namespace JoshuaWood_ST10296167_PROG7311_POE.Models
 
     }
 }
+//--------------------------------------------------------X END OF FILE X-------------------------------------------------------------------//

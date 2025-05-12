@@ -20,11 +20,13 @@ namespace JoshuaWood_ST10296167_PROG7311_POE.Repository.User
         
         // Methods
         //------------------------------------------------------------------------------------------------------------------------------------------//
+        // This method retireves a user from the db based on their email
         public async Task<Models.User> GetUserByEmailAsync(string email)
         {
             return await _context.Users.SingleOrDefaultAsync(x => x.Email == email);
         }
 
+        // This method adds a new farmer to the db
         public async Task<IdentityResult> CreateFarmerAsync(Models.User farmer, string password)
         {
             var result = await _userManager.CreateAsync(farmer, password);
@@ -38,6 +40,7 @@ namespace JoshuaWood_ST10296167_PROG7311_POE.Repository.User
             return result;
         }
 
+        // This method retrieves the latest farmer code from the db
         public async Task<string?> GetLatestFarmerCodeAsync()
         {
             var farmers = await _userManager.GetUsersInRoleAsync("Farmer");

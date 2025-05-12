@@ -6,13 +6,17 @@ namespace JoshuaWood_ST10296167_PROG7311_POE.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        // Controller
+        //------------------------------------------------------------------------------------------------------------------------------------------//
+        public HomeController()
         {
-            _logger = logger;
-        }
 
+        }
+        //------------------------------------------------------------------------------------------------------------------------------------------//
+
+        // Views
+        //------------------------------------------------------------------------------------------------------------------------------------------//
         public IActionResult Index()
         {
             if (User.Identity == null || !User.Identity.IsAuthenticated)
@@ -21,11 +25,7 @@ namespace JoshuaWood_ST10296167_PROG7311_POE.Controllers
             }
             return View();
         }
-
-        public IActionResult Privacy()
-        {
-            return View();
-        }
+        //------------------------------------------------------------------------------------------------------------------------------------------//
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
@@ -34,3 +34,4 @@ namespace JoshuaWood_ST10296167_PROG7311_POE.Controllers
         }
     }
 }
+//--------------------------------------------------------X END OF FILE X-------------------------------------------------------------------//

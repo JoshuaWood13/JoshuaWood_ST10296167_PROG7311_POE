@@ -24,9 +24,11 @@ namespace JoshuaWood_ST10296167_PROG7311_POE.Controllers
         //------------------------------------------------------------------------------------------------------------------------------------------//
         public async Task<IActionResult> AddProduct()
         {
+            // Get current farmer 
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var farmer = await _userManager.FindByIdAsync(userId);
 
+            // Check if they have a valid farmer code to use
             if (farmer == null || string.IsNullOrEmpty(farmer.FarmerCode))
             {
                 TempData["Error"] = "Current farmer not found or missing FarmerCode.";
@@ -35,6 +37,7 @@ namespace JoshuaWood_ST10296167_PROG7311_POE.Controllers
 
             var newProductCode = await _productService.GenerateProductCodeAsync();
 
+            // Pass product code and farmer code to the view
             var model = new Product
             {
                 ProductCode = newProductCode,
@@ -83,7 +86,7 @@ namespace JoshuaWood_ST10296167_PROG7311_POE.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return View("AddProduct");
+                return View("AddProduct", product);
             }
 
             var result = await _productService.AddProductAsync(product);
@@ -96,7 +99,7 @@ namespace JoshuaWood_ST10296167_PROG7311_POE.Controllers
             else
             {
                 TempData["Error"] = "Failed to add product";
-                return View("AddProduct");
+                return View("AddProduct", product);
             }
         }
         //------------------------------------------------------------------------------------------------------------------------------------------//

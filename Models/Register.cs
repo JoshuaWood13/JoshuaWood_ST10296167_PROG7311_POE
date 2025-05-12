@@ -30,3 +30,4 @@ namespace JoshuaWood_ST10296167_PROG7311_POE.Models
         public string ConfirmPassword { get; set; }
     }
 }
+//--------------------------------------------------------X END OF FILE X-------------------------------------------------------------------//

@@ -45,7 +45,7 @@ namespace JoshuaWood_ST10296167_PROG7311_POE.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return View("Login");
+                return View("Login", login);
             }
 
             var isValidUser = await _userService.LoginUserAsync(login);
@@ -55,8 +55,8 @@ namespace JoshuaWood_ST10296167_PROG7311_POE.Controllers
                 return RedirectToAction("Index","Home");
             }
             TempData["Error"] = "Incorrect email or password";
-            ModelState.Clear();
-            return View("Login");
+           // ModelState.Clear();
+            return View("Login",login);
         }
 
         [HttpPost]
@@ -64,7 +64,7 @@ namespace JoshuaWood_ST10296167_PROG7311_POE.Controllers
         {
             if(!ModelState.IsValid)
             {
-                return View("Register");
+                return View("Register", farmer);
             }
 
             var result = await _userService.RegisterFarmerAsync(farmer);
@@ -75,6 +75,7 @@ namespace JoshuaWood_ST10296167_PROG7311_POE.Controllers
                 return RedirectToAction("Register");
             }
 
+            // Display only the valid error messages
             foreach (var error in result.Errors)
             {
                 if (error.Code.Contains("Password"))
@@ -91,7 +92,7 @@ namespace JoshuaWood_ST10296167_PROG7311_POE.Controllers
                 }
             }
 
-            return View("Register");
+            return View("Register", farmer);
         }
         //------------------------------------------------------------------------------------------------------------------------------------------//
     }

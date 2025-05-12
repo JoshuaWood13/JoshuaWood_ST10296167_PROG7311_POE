@@ -8,19 +8,18 @@ namespace JoshuaWood_ST10296167_PROG7311_POE.Repository.Product
     public class ProductRepository : IProductRepository
     {
         private readonly ApplicationDbContext _context;
-        private readonly UserManager<Models.User> _userManager;
 
         // Controller 
         //------------------------------------------------------------------------------------------------------------------------------------------//
-        public ProductRepository(ApplicationDbContext context, UserManager<Models.User> userManager)
+        public ProductRepository(ApplicationDbContext context)
         {
             _context = context;
-            _userManager = userManager;
         }
         //------------------------------------------------------------------------------------------------------------------------------------------//
 
         // Methods
         //------------------------------------------------------------------------------------------------------------------------------------------//
+        // This method adds a product to the db
         public async Task<bool> createProduct(Models.Product product)
         {
             try
@@ -36,6 +35,7 @@ namespace JoshuaWood_ST10296167_PROG7311_POE.Repository.Product
             }
         }
 
+        // This method returns the latest product code from the db
         public async Task<string> GetLatestProductCodeAsync()
         {
             return await _context.Products
@@ -44,12 +44,14 @@ namespace JoshuaWood_ST10296167_PROG7311_POE.Repository.Product
                 .FirstOrDefaultAsync();
         }
 
+        // This method gets all products created by a specific farmer from the db 
         public async Task<List<Models.Product>> GetAllProductsByFarmerCodeAsync(string farmerCode)
         {
             var products = await _context.Products.Where(p => p.FarmerCode == farmerCode).ToListAsync();
             return products;
         }
 
+        // This method gets all the products from the db
         public async Task<List<Models.Product>> GetAllProductsAsync()
         {
             var productts = await _context.Products.ToListAsync();
@@ -57,3 +59,4 @@ namespace JoshuaWood_ST10296167_PROG7311_POE.Repository.Product
         }
     }
 }
+//--------------------------------------------------------X END OF FILE X-------------------------------------------------------------------//

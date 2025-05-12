@@ -10,6 +10,7 @@ namespace JoshuaWood_ST10296167_PROG7311_POE.Data
         {
             using (var context = new ApplicationDbContext(serviceProvider.GetRequiredService<DbContextOptions<ApplicationDbContext>>()))
             {
+                // Check if db is seeded
                 if (context.Roles.Any() && context.Products.Any())
                 {
                     return;
@@ -30,10 +31,10 @@ namespace JoshuaWood_ST10296167_PROG7311_POE.Data
                     }
                 }
 
-                // Create default users
                 var userManager = serviceProvider.GetRequiredService<UserManager<User>>();
 
-                // Default Employee user
+                // Create default Employee user
+                //------------------------------------------------------------------------------------------------------------------------------------------//
                 var employeeEmail = "employee@agrienergy.com";
                 if (await userManager.FindByEmailAsync(employeeEmail) == null)
                 {
@@ -60,8 +61,10 @@ namespace JoshuaWood_ST10296167_PROG7311_POE.Data
                         }
                     }
                 }
+                //------------------------------------------------------------------------------------------------------------------------------------------//
 
                 // Create demonstration farmers
+                //------------------------------------------------------------------------------------------------------------------------------------------//
                 var farmers = new[]
                 {
                     new { Email = "farmer1@agrienergy.com", FarmerCode = "F001", FirstName = "Bob", LastName = "Dylan" },
@@ -101,8 +104,10 @@ namespace JoshuaWood_ST10296167_PROG7311_POE.Data
                         }
                     }
                 }
+                //------------------------------------------------------------------------------------------------------------------------------------------//
 
                 // Add demonstration products
+                //------------------------------------------------------------------------------------------------------------------------------------------//
                 if (!context.Products.Any())
                 {
                     var products = new List<Product>
@@ -222,6 +227,7 @@ namespace JoshuaWood_ST10296167_PROG7311_POE.Data
                     Console.WriteLine("Created demonstration products");
                 }
             }
+            //------------------------------------------------------------------------------------------------------------------------------------------//
         }
     }
 }

@@ -16,3 +16,4 @@ namespace JoshuaWood_ST10296167_PROG7311_POE.Services.Product
         Task<List<Models.Product>> GetFilteredProductsAsync(FilteredProducts filter);
     }
 }
+//--------------------------------------------------------X END OF FILE X-------------------------------------------------------------------//

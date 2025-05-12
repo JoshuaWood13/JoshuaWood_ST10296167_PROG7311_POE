@@ -19,3 +19,4 @@ namespace JoshuaWood_ST10296167_PROG7311_POE.Models
         public ICollection<Product> Products { get; set; }  // Navigation property to the Products model
     }
 }
+//--------------------------------------------------------X END OF FILE X-------------------------------------------------------------------//
