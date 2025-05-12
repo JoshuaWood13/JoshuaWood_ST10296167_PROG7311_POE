@@ -8,10 +8,7 @@ GitHub repository: [https://github.com/JoshuaWood13/JoshuaWood_ST10296167_PROG73
    - .NET 8.0 SDK or later
    - ASP.NET Core
 
-2. Clone the project code:
-   ```bash
-   git clone https://github.com/JoshuaWood13/JoshuaWood_ST10296167_PROG7311_POE.git
-Or extract the project `.zip` file to a folder of your choosing
+2. Clone the project code from GitHub or extract the project `.zip` file to a folder of your choosing
 
 3. Navigate to the folder and open the `.sln` file using Visual Studio
 
