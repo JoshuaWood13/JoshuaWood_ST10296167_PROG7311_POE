@@ -97,6 +97,13 @@
             $input.siblings('.invalid-feedback').text('');
         });
 
+        // Clear error on select change
+        $('select').on('change', function () {
+            var $select = $(this);
+            $select.removeClass('is-invalid');
+            $select.siblings('.invalid-feedback').text('');
+        });
+
         // Auto dismiss toast
         setTimeout(() => {
             const toasts = document.querySelectorAll('.toast');
