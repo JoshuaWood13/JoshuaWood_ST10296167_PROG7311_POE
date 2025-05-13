@@ -55,7 +55,6 @@ namespace JoshuaWood_ST10296167_PROG7311_POE.Controllers
                 return RedirectToAction("Index","Home");
             }
             TempData["Error"] = "Incorrect email or password";
-           // ModelState.Clear();
             return View("Login",login);
         }
 
@@ -75,7 +74,7 @@ namespace JoshuaWood_ST10296167_PROG7311_POE.Controllers
                 return RedirectToAction("Register");
             }
 
-            // Display only the valid error messages
+            // Display only valid error messages
             foreach (var error in result.Errors)
             {
                 if (error.Code.Contains("Password"))

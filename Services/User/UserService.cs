@@ -70,7 +70,7 @@ namespace JoshuaWood_ST10296167_PROG7311_POE.Services.User
 
             // Used ChatGPT to get composite formatting code
             int codeNumber;
-            var numericPart = latestFarmerCode.Substring(1); // Remove the "F" from the start
+            var numericPart = latestFarmerCode.Substring(1); // Remove the "F" from the code
             if (int.TryParse(numericPart, out codeNumber))
             {
                 codeNumber++; 

@@ -46,7 +46,7 @@ namespace JoshuaWood_ST10296167_PROG7311_POE.Services.Product
             }
 
             int codeNumber;
-            var numericPart = latestCode.Substring(1); // Remove the "P" from the start
+            var numericPart = latestCode.Substring(1); // Removes the "P" from the code
             if (int.TryParse(numericPart, out codeNumber))
             {
                 codeNumber++;
@@ -73,7 +73,7 @@ namespace JoshuaWood_ST10296167_PROG7311_POE.Services.Product
             return products;
         }
 
-        // This method dynamically gets a list of products based on selected filters 
+        // This method dynamically gets a list of products based on selected filters and returns it
         public async Task<List<Models.Product>> GetFilteredProductsAsync(FilteredProducts filter)
         {
             var products = await _productRepository.GetAllProductsAsync();
