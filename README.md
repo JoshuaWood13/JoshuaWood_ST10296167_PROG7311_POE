@@ -37,11 +37,11 @@ This prototype includes two distinct user roles: **Employee** and **Farmer**.
 
 The following accounts are automatically created in the local database when first running the app:
 
-### Employee Account
+### Seeded Employee Account
 - **Email:** employee@agrienergy.com
 - **Password:** Employee123!
 
-### Farmer Accounts
+### Seeded Farmer Accounts
 1. **Farmer 1**
    - **Email:** farmer1@agrienergy.com
    - **Password:** Farmer1!
@@ -68,7 +68,7 @@ After logging in with a farmer account, users can:
 - Create the product by clicking "Create Product" after entering valid data
 
 #### View Products
-- Access a list of their added products by clicking "Your Products" in the navigation bar
+- Access a list of their added products by clicking "Your Products" on the home page or navigation bar
 - View product details including:
   - Product ID
   - Name
@@ -85,7 +85,7 @@ After logging in with a farmer account, users can:
 After logging in with the employee account, users can:
 
 #### Add Farmer
-- Create new farmer accounts by clicking "Add Farmer" in the navigation bar
+- Create new farmer accounts by clicking "Add Farmer" on the home page or navigation bar
 - Enter the new farmer's details:
   - First name
   - Last name
@@ -95,7 +95,7 @@ After logging in with the employee account, users can:
 - Create the account by clicking "Create Farmer" after entering valid data
 
 #### View Products
-- Access a complete list of all farmer products by clicking "View Products"
+- Access a complete list of all farmer products by clicking "View Products" on the home page or navigation bar
 - View comprehensive product details:
   - Farmer code
   - Product code
