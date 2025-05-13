@@ -113,7 +113,7 @@
                         <td>@product.FarmerCode</td>
                         <td>@product.ProductCode</td>
                         <td>@product.Name</td>
-                        <td>@($"R {product.Price:F2}")</td>
+                        <td>@($"R {product.Price:N2}")</td>
                         <td>@product.Category</td>
                         <td>
                             @if (string.IsNullOrWhiteSpace(product.Description))
