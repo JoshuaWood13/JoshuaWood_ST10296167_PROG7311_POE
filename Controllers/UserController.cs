@@ -48,6 +48,7 @@ namespace JoshuaWood_ST10296167_PROG7311_POE.Controllers
                 return View("Login", login);
             }
 
+            // Call user service login method
             var isValidUser = await _userService.LoginUserAsync(login);
 
             if (isValidUser)
@@ -66,6 +67,7 @@ namespace JoshuaWood_ST10296167_PROG7311_POE.Controllers
                 return View("Register", farmer);
             }
 
+            // Call user service register method
             var result = await _userService.RegisterFarmerAsync(farmer);
 
             if (result.Succeeded)
