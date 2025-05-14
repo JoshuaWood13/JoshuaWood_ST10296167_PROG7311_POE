@@ -1,13 +1,7 @@
-﻿@using Microsoft.AspNetCore.Identity
-@inject UserManager<User> UserManager
-@inject SignInManager<User> SignInManager
-@using JoshuaWood_ST10296167_PROG7311_POE.Models
-
-@{
-    var user = await UserManager.GetUserAsync(User);
-    string firstName = user?.FirstName ?? "User";
-    var isEmployee = await UserManager.IsInRoleAsync(user, "Employee");
-    var isFarmer = await UserManager.IsInRoleAsync(user, "Farmer");
+﻿@{
+    string firstName = ViewData["FirstName"].ToString();
+    var isEmployee = (bool)ViewData["IsEmployee"];
+    var isFarmer = (bool)ViewData["IsFarmer"];
 }
 <head>
 
