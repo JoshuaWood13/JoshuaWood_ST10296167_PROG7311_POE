@@ -38,10 +38,12 @@ namespace JoshuaWood_ST10296167_PROG7311_POE.Repository.Product
         // This method returns the latest product code from the db
         public async Task<string> GetLatestProductCodeAsync()
         {
-            return await _context.Products
+            var latestCode = await _context.Products
                 .OrderByDescending(p => p.ProductCode)
                 .Select(p => p.ProductCode)
                 .FirstOrDefaultAsync();
+
+            return latestCode;
         }
 
         // This method gets all products created by a specific farmer from the db 
