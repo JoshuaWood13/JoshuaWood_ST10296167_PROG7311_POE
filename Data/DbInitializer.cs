@@ -42,7 +42,7 @@ namespace JoshuaWood_ST10296167_PROG7311_POE.Data
                     {
                         UserName = employeeEmail,
                         Email = employeeEmail,
-                        FirstName = "Default",
+                        FirstName = "Admin",
                         LastName = "Employee",
                         EmailConfirmed = true 
                     };
