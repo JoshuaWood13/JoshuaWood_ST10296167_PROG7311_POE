@@ -1,5 +1,6 @@
 ﻿using JoshuaWood_ST10296167_PROG7311_POE.Models;
 using JoshuaWood_ST10296167_PROG7311_POE.Services.Product;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
@@ -22,6 +23,7 @@ namespace JoshuaWood_ST10296167_PROG7311_POE.Controllers
 
         // Views
         //------------------------------------------------------------------------------------------------------------------------------------------//
+        [Authorize]
         public async Task<IActionResult> AddProduct()
         {
             // Get current farmer 
@@ -47,6 +49,7 @@ namespace JoshuaWood_ST10296167_PROG7311_POE.Controllers
             return View(model);
         }
 
+        [Authorize]
         public async Task<IActionResult> ViewFarmerProducts()
         {
             var user = await _userManager.GetUserAsync(User);
@@ -56,6 +59,7 @@ namespace JoshuaWood_ST10296167_PROG7311_POE.Controllers
             return View(products);
         }
 
+        [Authorize]
         public async Task<IActionResult> ViewProducts(string farmerCode, string category, DateTime? startDate, DateTime? endDate)
         {
             // Populate filter model with selected filters

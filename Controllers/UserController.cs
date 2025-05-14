@@ -1,5 +1,6 @@
 ﻿using JoshuaWood_ST10296167_PROG7311_POE.Models;
 using JoshuaWood_ST10296167_PROG7311_POE.Services.User;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace JoshuaWood_ST10296167_PROG7311_POE.Controllers
@@ -23,6 +24,7 @@ namespace JoshuaWood_ST10296167_PROG7311_POE.Controllers
             return View();
         }
 
+        [Authorize]
         public async Task<IActionResult> Register()
         {
             var newFarmerCode = await _userService.GenerateNewFarmerCode(); 
